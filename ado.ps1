@@ -1,9 +1,14 @@
 # Setup new ADO repo activities
+
+Write-Host -ForegroundColor Green "Installing azcli extension for ado if not installed"
+$extado=`az extension show -n azure-devops`
+if ($extado -eq $null) { az extension add -n azure-devops }
+
 az login
 $subscriptionID = Read-Host -Prompt 'What is your subscription ID (example xxxx-xxxx-xxxx-xxxx): '
 az account set -s $subscriptionID
 az account show
-Write-Host -ForegroundColor Green "Please verify for the correct subscription "
+Write-Host -ForegroundColor Green "Please verify if we are on the right account."
 Read-Host "Press any [ENTER] to continue..."
 
 Write-Host -ForegroundColor Cyan "Create $env:USERPROFILE\Documents\ado_repo if it doesn't exist"
